@@ -1,0 +1,48 @@
+@font-face {
+    font-family:"Roboto-400";
+    src: url('../react/site/public/assets/fonts/Roboto-400.ttf');
+}
+
+  @font-face {
+    font-family:"Roboto-500";
+    src: url('../react/site/public/assets/fonts/Roboto-500.ttf');
+} 
+
+@font-face {
+    font-family:"Roboto-700";
+    src: url('../react/site/public/assets/fonts/Roboto-700.ttf');
+}
+
+
+body{margin: 0em;padding: 0em;}
+*{box-sizing: border-box;}
+.p1-esquerdo,.p1-linha{display: flex; flex-direction: column;}
+.p1-container{display: flex; flex-direction: row;}
+
+.p1-container{height: 100vh;width: 100%;}
+.p1-esquerdo{width: 25%;height: 100vh;background-color: #2B3031;border-top-left-radius: 10px; border-bottom-left-radius: 10px;}
+.p1-logo,.p1-linha{display: flex; flex-direction: row;}
+.p1-logo2 {height: 2em; display: flex; flex-direction: column; align-self: center;}
+.p1-logo{padding: 3em 7.2em 3em 3.5em; justify-content: space-around;}
+.p1-vazia{height: 3.8em; background-color: #262626;}
+.p1-logo1 img{width: 1.3em; height: 1.6em;}
+
+.p1-linha{height: 3.5em; padding: 1.18em 1.75em 1em 4em;justify-content: space-between;font: 1.12em "Roboto-500";color: white;}
+.p1-alunos{background-color: white; height: 3.5em; padding: 1.18em 14.6em 1em 4em; font: 1.12em "Roboto-500";}
+
+
+.p1-direito{width: 100%;}
+.p1-icones1 img{width: 2.75em; height:2.75em;}
+.p1-elipse1{width: 3.5em; height: 3.5em; border:solid #262626; border-radius: 50%;}
+/*.p1-elipse2{width: 1.25em; height: 1.25em; border:solid #2B3031; border-radius: 50%; position: absolute; left: 28%;}
+*/.p1-elipse2{width: 1.25em; height: 1.25em; border:solid #2B3031; border-radius: 50%; position: relative; z-index: 9;left:-1.25em}
+.p1-foto{display: flex; flex-direction: row;}
+.p1-logado, .p1-icones1, .p1-usuario, .p1-cabeçalho{display: flex; flex-direction: row;}
+.p1-cabeçalho{justify-content: space-between;padding: 1.1em 2.6em;}
+.p1-usuario,.p1-icones1{align-items: center;}
+.p1-espaço{width: 0.3em;}
+
+
+
+.p1-inputs,.p1-coluna div,.p1-inserirAluno{display: flex; flex-direction: row;}
+.p1-cadastro{padding: 3.5em 3.2em;}
