@@ -1,13 +1,12 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"set PORT=3030 && nodemon ./src/index.js"
+    "start": "set PORT=3030 && nodemon ./src/index.js"
   },
-  "type":"module",
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -18,5 +17,7 @@
     "nodemon": "^2.0.12",
     "sequelize": "^6.6.5",
     "sequelize-auto": "^0.8.4"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }
