@@ -1,10 +1,12 @@
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import LoadingBar from 'react-top-loading-bar';
+
 import{P1container, P1esquerdo, P1direito} from './styled.js'
 
 import Api from '../services/api';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 
 
@@ -21,7 +23,7 @@ export default function Conteudo(){
     const [curso, setCurso] = useState('');
     const [idAlterando, setIdAlterando] = useState(0);
     
-
+    const loading = useRef(null);
 
     async function listar(){
         let r = await api.listar();
@@ -32,16 +34,24 @@ export default function Conteudo(){
     async function inserir(){
         if(idAlterando==0){
             let r = await api.inserir(nome,chamada,curso,turma);//variaveis de estado aqui. as q foram aqui criadas né
-            toast.dark('Aluno inserido com sucesso.')
+            if(r.erro)
+                toast.error(r.erro)
+            else
+                toast.dark('Aluno inserido com sucesso.')
         }
         else{
             let r = await api.alterar(nome,chamada,curso,turma,idAlterando);//variaveis de estado aqui. as q foram aqui criadas né
-            toast.dark('Aluno alterado com sucesso.')
-            setNome('');
-            setChamada('');
-            setCurso('');
-            setTurma('');
-            setIdAlterando(0);
+            if(r.erro)
+                toast.error(r.erro)
+
+            else{
+                toast.dark('Aluno alterado com sucesso.')
+                setNome('');
+                setChamada('');
+                setCurso('');
+                setTurma('');
+                setIdAlterando(0);
+            }
             
         }
 
@@ -49,9 +59,15 @@ export default function Conteudo(){
     }
 
     async function remover(id){
+        let verifique = window.confirm('Você deseja realmente deletar esse aluno❔')
+        if(verifique){
         let r = await api.deletar(id);
-        toast('Aluno removido :(')
+        toast('❌Aluno removido❌')
         listar();
+        }
+        else{
+            alert('Você não deletou esse aluno.')
+        }
     }
 
     async function editar(item){
@@ -71,19 +87,20 @@ export default function Conteudo(){
     return(
         <P1container>
             <ToastContainer/>
+            <LoadingBar color="green" ref={loading} />
         
         <P1esquerdo>
-            <div class="p1-logo"> 
-                <div class="p1-logo1"><img src='/assets/images/Logo1.png' alt=""/></div>
-                <div class="p1-logo2"><img src='/assets/images/Logo2.svg' alt=""/></div>
+            <div classNameName="p1-logo"> 
+                <div className="p1-logo1"><img src='/assets/images/Logo1.png' alt=""/></div>
+                <div className="p1-logo2"><img src='/assets/images/Logo2.svg' alt=""/></div>
             </div>
-            <div class="p1-vazia"></div>
+            <div className="p1-vazia"></div>
             
-                <div class="p1-linha">
-                    <div class="p1-gerenciamento">Gerenciamento</div>
-                    <div class="p1-seta"><img src="/assets/images/Seta.svg" alt=""/></div>
+                <div className="p1-linha">
+                    <div className="p1-gerenciamento">Gerenciamento</div>
+                    <div className="p1-seta"><img src="/assets/images/Seta.svg" alt=""/></div>
                 </div>
-                <div class="p1-alunos">Alunos</div>
+                <div className="p1-alunos">Alunos</div>
             
         </P1esquerdo>
 
@@ -91,107 +108,107 @@ export default function Conteudo(){
 
         <P1direito>
 
-            <div class="p1-cabeçalho">
-                <div class="p1-logado">
-                    <div class="p1-foto">
-                        <div class="p1-elipse1">
+            <div className="p1-cabeçalho">
+                <div className="p1-logado">
+                    <div className="p1-foto">
+                        <div className="p1-elipse1">
                             <img src="/assets/images/Ellipse.png" alt=""/>
                         </div>
-                        <div class="p1-elipse2">
-                            <div class="p1-numero">3</div>
+                        <div className="p1-elipse2">
+                            <div className="p1-numero">3</div>
                         </div>
                     </div>
-                    <div class="p1-usuario">
-                        <div class="p1-ola">Olá, </div>
-                        <div class="p1-espaço"></div>
-                        <div class="p1-bruno">Bruno de Oliveira</div>
+                    <div className="p1-usuario">
+                        <div className="p1-ola">Olá, </div>
+                        <div className="p1-espaço"></div>
+                        <div className="p1-bruno">Bruno de Oliveira</div>
                     </div>
                 </div>
-                <div class="p1-icones1">
-                    <div class="p1-reload"> <img src="/assets/images/Reload.png" alt=""/></div>
-                    <div class="p1-sair"> <img src="/assets/images/Out.png" alt=""/></div>
+                <div className="p1-icones1">
+                    <div className="p1-reload"> <img src="/assets/images/Reload.png" alt=""/></div>
+                    <div className="p1-sair"> <img src="/assets/images/Out.png" alt=""/></div>
                 </div>
             </div>
 
-            <div class="p1-conteudo">
-                <div class="p1-cadastro">
-                    <div class="p1-inserirAluno">
-                        <div class="p1-frescura"> <img src="/assets/images/Linha.png" alt=""/></div>
-                        <div class="p1-aluno">Novo Aluno</div>
+            <div className="p1-conteudo">
+                <div className="p1-cadastro">
+                    <div className="p1-inserirAluno">
+                        <div className="p1-frescura"> <img src="/assets/images/Linha.png" alt=""/></div>
+                        <div className="p1-aluno">{idAlterando==0?"Novo Aluno":`Alterando Aluno : ${idAlterando}`}</div>
                     </div>
-                    <div class="p1-inputs">
-                        <div class="p1-coluna">
+                    <div className="p1-inputs">
+                        <div className="p1-coluna">
                             <div>
-                                <div class="campo">Nome:</div>
+                                <div className="campo">Nome:</div>
                                 <input type="text" value={nome} onChange={e =>setNome(e.target.value)} />
                             </div>
                             <div>
-                                <div class="campo">Chamada:</div>
+                                <div className="campo">Chamada:</div>
                                 <input type="number" value={chamada} onChange={e =>setChamada(e.target.value)}/>
                             </div>
                         </div>
 
-                        <div class="p1-coluna">
+                        <div className="p1-coluna">
                             <div>
-                                <div class="campo">Curso:</div>
+                                <div className="campo">Curso:</div>
                                 <input type="text" value={curso} onChange={e =>setCurso(e.target.value)}/>
                             </div>
                             <div>
-                                <div class="campo">Turma:</div>
+                                <div className="campo">Turma:</div>
                                 <input type="text" value={turma} onChange={e =>setTurma(e.target.value)}/>
                             </div>
                         </div>
 
 
-                        <div class="p1-coluna3">
-                            <button onClick={inserir} >Cadastrar</button>
+                        <div className="p1-coluna3">
+                            <button onClick={inserir} >{idAlterando==0?"Cadastrar":"Alterar"}</button>
                         </div>
                     </div>
                 </div>
 
 
-                <div class="p1-cadastro2">
+                <div className="p1-cadastro2">
 
-                    <div class="p1-inserirAluno">
-                        <div class="p1-frescura"> <img src="/assets/images/Linha.png" alt=""/></div>
-                        <div class="p1-aluno">Alunos Matriculados</div>
+                    <div className="p1-inserirAluno">
+                        <div className="p1-frescura"> <img src="/assets/images/Linha.png" alt=""/></div>
+                        <div className="p1-aluno">Alunos Matriculados</div>
                     </div>
 
-                    <div class="p1-tabela">
-                        <div class="p1-tbcabeçalho">
-                            <div class="p1-id">ID</div>
-                            <div class="p1-nome">Nome</div>
-                            <div class="p1-chamada">Chamada</div>
-                            <div class="p1-turma">Turma</div>
-                            <div class="p1-curso">Curso</div>
+                    <div className="p1-tabela">
+                        <div className="p1-tbcabeçalho">
+                            <div className="p1-id">ID</div>
+                            <div className="p1-nome">Nome</div>
+                            <div className="p1-chamada">Chamada</div>
+                            <div className="p1-turma">Turma</div>
+                            <div className="p1-curso">Curso</div>
                         </div>
 
-                        <div class="p1-infoalunos">
-                        <div class="gato-baixo"></div>
-                            {alunos.map(item =>
-                                <div class="p1-individual">
-                                    <div class="espaço"></div>
-                                    <div class="p1-id">{item.id_matricula}</div>
-                                    <div class="p1-nome">{item.nm_aluno}</div>
-                                    <div class="p1-chamada">{item.nr_chamada}</div>
-                                    <div class="p1-turma">{item.nm_turma}</div>
-                                    <div class="p1-curso">{item.nm_curso}</div>
+                        <div className="p1-infoalunos">                                
+                        <div className="gato-baixo"></div>
+                            {alunos.map(item =>                                  
+                                <div className="p1-individual cor">
+                                    <div className="espaço"></div>
+                                    <div className="p1-id">{item.id_matricula}</div>
+                                    <div className="p1-nome" title={item.nm_aluno} >{(item.nm_aluno != null && item.nm_aluno.length >=20) ? `${item.nm_aluno.substr(0,20)}...`: item.nm_aluno}</div>
+                                    <div className="p1-chamada">{item.nr_chamada}</div>
+                                    <div className="p1-turma">{item.nm_turma}</div>
+                                    <div className="p1-curso">{item.nm_curso}</div>
                         
-                                    <div class="p1-elip esse">
-                                    <div class="p1-elip2 p1-editar"><img onClick={()=>remover(item.id_matricula)} src="/assets/images/delete.svg" alt=""/></div>
+                                    <div className="p1-elip esse">
+                                    <div className="p1-elip2 p1-editar"><img onClick={()=>remover(item.id_matricula)} src="/assets/images/delete.svg" alt=""/></div>
                                     </div>
                                                         
-                                    <div class="p1-elip">
-                                         <div class="p1-elip2 p1-deletar"><img onClick={()=>editar(item)} src="/assets/images/edit.svg" alt=""/></div>
+                                    <div className="p1-elip">
+                                         <div className="p1-elip2 p1-deletar"><img onClick={()=>editar(item)} src="/assets/images/edit.svg" alt=""/></div>
                                     </div>
                         
-                                    <div class="espaço"></div>
+                                    <div className="espaço"></div>
                                 </div>
                                 )}
                             
 
 
-                            <div class="gato-baixo"></div>
+                            <div className="gato-baixo"></div>
                         </div>
                     </div>
                 </div>

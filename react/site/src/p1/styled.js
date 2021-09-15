@@ -72,6 +72,7 @@ input{border: 1px solid #A8A8A8;
 .p1-elip2{display: flex; flex-direction: column; justify-content: center; align-self: center; height: 100%;}
 .p1-deletar img, .p1-editar img{width: 1.3em; height: 1.3em;}
 .esse{margin-right: 1em;}
+.cor{background-color: #F1F0F0}
 
 
 
