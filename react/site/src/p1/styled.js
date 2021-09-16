@@ -48,7 +48,8 @@ input{border: 1px solid #A8A8A8;
 .p1-ola{ font:1em "Roboto-400"; color: #615858}
 .p1-bruno{font-family: "Roboto-500";color: #615858}
 .p1-tabela{display:flex; flex-direction: column; height: 100%;}
-.p1-tbcabeçalho,.p1-individual{display:flex; flex-direction: row;}
+.p1-tbcabeçalho,.p1-individual{display:flex; flex-direction: row;
+:hover{.p1-elip{visibility:visible;}}}
 .p1-id{width: 10%;}
 .p1-curso{width: 20%;}
 .p1-nome{width: 30%;}
@@ -68,11 +69,12 @@ input{border: 1px solid #A8A8A8;
 .gato-alto{height: 1em;border-top: 1px solid #E2E2E2;}
 .p1-numero, .p1-elipse2{display: flex; flex-direction: column;}
 .p1-numero{align-self: center; justify-content: center; width: 0.4em; height: 100%; font:0.6em "Roboto-700"; color:white}
-.p1-elip{width: 2.3em; height: 2.3em; background-color:#565656; border-radius: 50%; display: flex; flex-direction: column;}
+.p1-elip{ visibility: hidden;width: 2.3em; height: 2.3em; background-color:#565656; border-radius: 50%; display: flex; flex-direction: column;}
 .p1-elip2{display: flex; flex-direction: column; justify-content: center; align-self: center; height: 100%;}
 .p1-deletar img, .p1-editar img{width: 1.3em; height: 1.3em;}
 .esse{margin-right: 1em;}
 .cor{background-color: #F1F0F0}
+
 
 
 

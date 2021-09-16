@@ -16,13 +16,14 @@ app.get('/matricula',async(req,resp) =>{
 
 function Validadora(a,n,c,t){
     let m = "";
-    if(parseInt(n) <= 0 || n==null)
+    //De acordo com banco, temos as seguintes validações para tamanho de string
+    if(parseInt(n) <= 0 || n==null || n.length>11)
         m +="Credencial de número de chamada inválida";
-    if(a.length==0)
+    if(a.length==0 || a.length>400)
         m+="Credencial de nome inválida";
-    if(c.length==0)
+    if(c.length==0 || c.length>400)
         m+="Credencial de curso inválida";
-    if(t.length==0)
+    if(t.length==0 || t.length>400)
         m+="Credencial de turma inválida";
     return m;
 }
